@@ -10,7 +10,7 @@ import muttonPicklebone from "@/assets/mutton_pickel.jpg";
 import muttonPickleboneless from "@/assets/mutton_pickel_boneless.webp";
 import prawnPickle from "@/assets/prawn_pickel.jpg";
 import fishPickle from "@/assets/fish_Pickel.jpg";
-import mangoPickle from "@/assets/mango_pickel.jpg";
+import mangoPickle from "@/assets/mangopickel.jpg";
 import lemonPickle from "@/assets/lemon_pickel.jpg";
 import tomatoPickle from "@/assets/tomato_pickel.jpg";
 import amlaPickle from "@/assets/amla_pickel.jpg";
