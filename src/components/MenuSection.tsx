@@ -11,7 +11,7 @@ import muttonPickleboneless from "@/assets/mutton_pickel_boneless.webp";
 import prawnPickle from "@/assets/prawn_pickel.jpg";
 import fishPickle from "@/assets/fish_Pickel.jpg";
 import mangoPickle from "@/assets/mangopickel.jpg";
-import lemonPickle from "@/assets/lemon_pickel.jpg";
+import lemonPickle from "@/assets/lemon_Pickel.jpg";
 import tomatoPickle from "@/assets/tomato_pickel.jpg";
 import amlaPickle from "@/assets/amla_pickel.jpg";
 import kakarkaya from "@/assets/kakarkaya_pickel.jpg";
@@ -26,7 +26,7 @@ import sunundalu from "@/assets/sunundalu.jpg";
 import kajuCookies from "@/assets/kaju_Cookies.jpg";
 import dryFruitsLaddu from "@/assets/dry_fruits_laddu.jpg";
 import palliChikki from "@/assets/palli_chikki.jpg";
-import karivepakuPodi from "@/assets/karivepaku_podi.jpg";
+import karivepakuPodi from "@/assets/karivepaku_Podi.jpg";
 import munigakuPodi from "@/assets/munigaku_Podi.jpg";
 
 interface MenuSectionProps {
