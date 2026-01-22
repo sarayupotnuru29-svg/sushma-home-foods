@@ -15,7 +15,7 @@ import lemonPickle from "@/assets/lemon_Pickel.jpg";
 import tomatoPickle from "@/assets/tomato_Pickel.jpg";
 import amlaPickle from "@/assets/amla_pickel.jpg";
 import kakarkaya from "@/assets/kakarkaya_pickel.jpg";
-import gonguraPickle from "@/assets/gongura_pickel.jpg";
+import gonguraPickle from "@/assets/gongura_Pickel.jpg";
 import pandumirchiPickle from "@/assets/mandu_mirchi_pickel.jpg";
 import chocolateCookies from "@/assets/chocolate_Cookies.jpg";
 import ragiandoatscookies from "@/assets/ragi_and_oats_cookies.jpg";
