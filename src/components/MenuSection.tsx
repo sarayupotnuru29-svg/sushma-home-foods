@@ -12,7 +12,7 @@ import prawnPickle from "@/assets/prawn_pickel.jpg";
 import fishPickle from "@/assets/fish_Pickel.jpg";
 import mangoPickle from "@/assets/mangopickel.jpg";
 import lemonPickle from "@/assets/lemon_Pickel.jpg";
-import tomatoPickle from "@/assets/tomato_pickel.jpg";
+import tomatoPickle from "@/assets/tomatopickel.jpg";
 import amlaPickle from "@/assets/amla_pickel.jpg";
 import kakarkaya from "@/assets/kakarkaya_pickel.jpg";
 import gonguraPickle from "@/assets/gongura_pickel.jpg";
