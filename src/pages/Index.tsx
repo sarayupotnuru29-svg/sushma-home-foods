@@ -50,15 +50,18 @@
 
 // export default Index;
 import { useState } from "react";
-import Header from "../components/Header"; // This is your 'trolley' component
+import Header from "../components/Header"; 
 import Hero from "../components/Hero";
 import MenuSection from "../components/MenuSection";
+import Services from "../components/Services";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 import Cart from "../components/Cart";
 import { toast } from "sonner";
 
 const Index = () => {
   const [cartItems, setCartItems] = useState<any[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false); // Controls the cart visibility
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleAddToCart = (item: any, weight: string, price: string) => {
     const cartId = `${item.id}-${weight}`;
@@ -82,20 +85,36 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* IMPORTANT: Pass setIsCartOpen(true) to the Header 
-        so the trolley icon can open the list
-      */}
+    <div className="relative min-h-screen bg-white overflow-x-hidden">
+      {/* 1. Header is fixed at the top */}
       <Header 
         cartItems={cartItems} 
         onOpenCart={() => setIsCartOpen(true)} 
       />
       
-      <Hero />
-      <MenuSection onAddToCart={handleAddToCart} />
+      {/* 2. Main content area with clear section IDs for navigation */}
+      <main className="flex flex-col w-full">
+        <section id="home" className="w-full">
+          <Hero />
+        </section>
+
+        <section id="menu" className="w-full">
+          <MenuSection onAddToCart={handleAddToCart} />
+        </section>
+
+        <section id="services" className="w-full bg-secondary/20">
+          <Services />
+        </section>
+
+        <section id="contact" className="w-full">
+          <Contact />
+        </section>
+      </main>
+
+      {/* 3. Footer at the very bottom */}
+      <Footer />
       
-      {/* This is the actual Cart drawer that shows the list and total 
-      */}
+      {/* 4. Cart Sidebar (only visible when isCartOpen is true) */}
       <Cart 
         isOpen={isCartOpen} 
         onClose={() => setIsCartOpen(false)} 
