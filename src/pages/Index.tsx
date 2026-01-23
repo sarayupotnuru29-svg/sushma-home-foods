@@ -1,72 +1,113 @@
-import { useState, useCallback } from "react";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import MenuSection from "@/components/MenuSection";
-import Cart from "@/components/Cart";
-import Services from "@/components/Services";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import { MenuItem } from "@/components/MenuCard";
+// import { useState } from "react";
+// import Navbar from "../components/Header"; // Adjust based on your Header.tsx name
+// import Hero from "../components/Hero";
+// import MenuSection from "../components/MenuSection";
+// import Cart from "../components/Cart";
+// import { toast } from "sonner";
 
-interface CartItem extends MenuItem {
-  quantity: number;
-}
+// const Index = () => {
+//   const [cartItems, setCartItems] = useState<any[]>([]);
+//   const [isCartOpen, setIsCartOpen] = useState(false);
+
+//   const handleAddToCart = (item: any, weight: string, price: string) => {
+//     const cartId = `${item.id}-${weight}`;
+    
+//     const newItem = {
+//       ...item,
+//       id: cartId,
+//       name: `${item.name} (${weight})`,
+//       price: price,
+//       quantity: 1
+//     };
+
+//     setCartItems((prev) => {
+//       const exists = prev.find(i => i.id === cartId);
+//       if (exists) {
+//         return prev.map(i => i.id === cartId ? { ...i, quantity: i.quantity + 1 } : i);
+//       }
+//       return [...prev, newItem];
+//     });
+
+//     toast.success(`Added ${item.name} (${weight}) to cart!`);
+//   };
+
+//   return (
+//     <div className="min-h-screen">
+//       <Navbar cartItems={cartItems} onOpenCart={() => setIsCartOpen(true)} />
+//       <Hero />
+//       <MenuSection onAddToCart={handleAddToCart} />
+//       {/* Add other components like Services, Contact, Footer here */}
+//       <Cart 
+//         isOpen={isCartOpen} 
+//         onClose={() => setIsCartOpen(false)} 
+//         cartItems={cartItems}
+//         onUpdateQuantity={(id, q) => {/* add logic */}}
+//         onRemoveItem={(id) => {/* add logic */}}
+//       />
+//     </div>
+//   );
+// };
+
+// export default Index;
+import { useState } from "react";
+import Header from "../components/Header"; // This is your 'trolley' component
+import Hero from "../components/Hero";
+import MenuSection from "../components/MenuSection";
+import Cart from "../components/Cart";
+import { toast } from "sonner";
 
 const Index = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false); // Controls the cart visibility
 
-  const handleAddToCart = useCallback((item: MenuItem) => {
+  const handleAddToCart = (item: any, weight: string, price: string) => {
+    const cartId = `${item.id}-${weight}`;
+    const newItem = {
+      ...item,
+      id: cartId,
+      name: `${item.name} (${weight})`,
+      price: price,
+      quantity: 1
+    };
+
     setCartItems((prev) => {
-      const existingItem = prev.find((i) => i.id === item.id);
-      if (existingItem) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-        );
+      const exists = prev.find(i => i.id === cartId);
+      if (exists) {
+        return prev.map(i => i.id === cartId ? { ...i, quantity: i.quantity + 1 } : i);
       }
-      return [...prev, { ...item, quantity: 1 }];
+      return [...prev, newItem];
     });
-  }, []);
 
-  const handleUpdateQuantity = useCallback((itemId: string, quantity: number) => {
-    if (quantity < 1) {
-      setCartItems((prev) => prev.filter((i) => i.id !== itemId));
-    } else {
-      setCartItems((prev) =>
-        prev.map((i) => (i.id === itemId ? { ...i, quantity } : i))
-      );
-    }
-  }, []);
-
-  const handleRemoveItem = useCallback((itemId: string) => {
-    setCartItems((prev) => prev.filter((i) => i.id !== itemId));
-  }, []);
-
-  const handleCartToggle = useCallback(() => {
-    setIsCartOpen((prev) => !prev);
-  }, []);
-
-  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    toast.success(`Added ${item.name} (${weight}) to cart!`);
+  };
 
   return (
     <div className="min-h-screen">
-      <Header cartCount={totalCartItems} onCartClick={handleCartToggle} />
+      {/* IMPORTANT: Pass setIsCartOpen(true) to the Header 
+        so the trolley icon can open the list
+      */}
+      <Header 
+        cartItems={cartItems} 
+        onOpenCart={() => setIsCartOpen(true)} 
+      />
       
-      <main>
-        <Hero />
-        <MenuSection cartItems={cartItems} onAddToCart={handleAddToCart} />
-        <Services />
-        <Contact />
-      </main>
-
-      <Footer />
-
-      <Cart
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
+      <Hero />
+      <MenuSection onAddToCart={handleAddToCart} />
+      
+      {/* This is the actual Cart drawer that shows the list and total 
+      */}
+      <Cart 
+        isOpen={isCartOpen} 
+        onClose={() => setIsCartOpen(false)} 
         cartItems={cartItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
+        onUpdateQuantity={(id, q) => {
+          setCartItems(prev => prev.map(item => 
+            item.id === id ? { ...item, quantity: Math.max(0, q) } : item
+          ).filter(item => item.quantity > 0));
+        }}
+        onRemoveItem={(id) => {
+          setCartItems(prev => prev.filter(item => item.id !== id));
+        }}
       />
     </div>
   );
